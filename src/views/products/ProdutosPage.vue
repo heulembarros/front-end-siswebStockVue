@@ -1,7 +1,7 @@
 <template>
   <div class="produtos">
     <div class="row mt-4">
-      <div class="col-lg-12"><h4 class="title">Categorias</h4></div>
+      <div class="col-lg-12"><h4 class="title">Produtos</h4></div>
     </div>
     <div class="row mt-5">
       <div class="col-lg-12 col-sm-12 col-md-12">

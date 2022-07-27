@@ -5,7 +5,7 @@
     </div>
     <div class="row mt-5">
       <div
-        v-for="categorie in categories"
+        v-for="categorie in categories.categories"
         :key="categorie.id"
         class="col-lg-3 col-sm-3 col-md-3"
       >
@@ -20,30 +20,24 @@
 </template>
 
 <script>
-import axios from "axios";
-// import { mapState, mapMutations, mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   name: "CategoriasPage",
   data() {
-    return {
-      categories: {},
-    };
+    return {};
   },
   methods: {
-    getCategories() {
-      axios.get("http://localhost:8081/categories/").then((resp) => {
-        this.categories = resp.data;
-      });
-    },
+    ...mapActions(["getCategories"]),
   },
   created() {
     this.getCategories();
   },
+
   computed: {
+    ...mapState(["categories"]),
   },
 };
 </script>
 
 <style scoped>
-
 </style>
