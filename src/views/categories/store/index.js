@@ -9,12 +9,10 @@ export default {
         }
     },
 
-
     actions: {
         getCategories( { commit } ){
             axios.get('http://localhost:8081/categories').then(resp => {
                 commit('getCategoriesM', resp.data)
-                console.log(resp.data)
             })
         }
     }
