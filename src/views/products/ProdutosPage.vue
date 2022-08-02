@@ -30,6 +30,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -41,7 +42,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions('products',["getProducts"]),
+    ...mapActions('products',['getProducts']),
     dinheiro(valor) {
       return "R$ " + valor.toFixed(2);
     },

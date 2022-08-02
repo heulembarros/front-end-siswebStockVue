@@ -6,5 +6,8 @@ export default {
     },
     [types.ADD_PRODUCTS](state, payload){
         state.products = payload
+    },
+    [types.GET_CATEGORIES](state, payload){
+        state.categories = payload
     }
 }
