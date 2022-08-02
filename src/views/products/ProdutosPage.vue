@@ -1,7 +1,9 @@
 <template>
   <div class="produtos">
     <div class="row mt-4">
-      <div class="col-lg-12"><h4 class="title">Produtos</h4></div>
+      <div class="col-lg-12 header-page"><h4 class="title">Produtos</h4>
+      <button class="btn btn-primary"><router-link to="/produtosadd">Adicionar</router-link></button>
+      </div>
     </div>
     <div class="row mt-5">
       <div class="col-lg-12 col-sm-12 col-md-12">
@@ -52,3 +54,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.header-page button a{
+  color: #fff;
+}
+.header-page button{
+  float: right;
+}
+</style>

@@ -1,5 +1,7 @@
 import axios from "axios"
 
+import { BASE_URL } from './../../../constantes.js'
+
 export default {
     state: { categories: []},
 
@@ -11,7 +13,7 @@ export default {
 
     actions: {
         getCategories( { commit } ){
-            axios.get('http://localhost:8081/categories').then(resp => {
+            axios.get(BASE_URL+'/categories').then(resp => {
                 commit('getCategoriesM', resp.data)
             })
         }
