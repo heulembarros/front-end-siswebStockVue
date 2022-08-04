@@ -15,15 +15,21 @@
               <th scope="col">Quantidade</th>
               <th scope="col">Valor</th>
               <th scope="col">Categoria</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="produto in products.products" :key="produto.id">
+            <tr v-for="(produto, key) in products.products" :key="key">
               <th scope="row">{{produto.id}}</th>
               <td>{{produto.name}}</td>
               <td>{{produto.amount}}</td>
               <td>{{dinheiro(produto.price)}}</td>
-              <td>{{produto.category}}</td>
+              <td>
+                <span v-for="(categoria, index) in produto.category" :key="index">{{categoria}}</span>
+              </td>
+              <td>
+                <router-link :to="{ name: 'produtoedit', params: {id: produto.id}}">Editar</router-link>
+              </td>
             </tr>
           </tbody>
         </table>
