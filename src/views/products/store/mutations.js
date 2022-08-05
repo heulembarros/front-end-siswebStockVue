@@ -9,5 +9,14 @@ export default {
     },
     [types.GET_CATEGORIES](state, payload){
         state.categories = payload
+    },
+    [types.FIND_PRODUCTS](state, payload){
+        state.products = payload
+    },
+    [types.UPDATE_PRODUCTS](state, payload){
+        state.products = payload
+    },
+    [types.DELETE_PRODUCTS](state, payload){
+        state.products = payload
     }
 }

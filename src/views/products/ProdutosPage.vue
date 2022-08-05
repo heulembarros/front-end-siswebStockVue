@@ -28,7 +28,8 @@
                 <span v-for="(categoria, index) in produto.category" :key="index">{{categoria}}</span>
               </td>
               <td>
-                <router-link :to="{ name: 'produtoedit', params: {id: produto.id}}">Editar</router-link>
+                <router-link :to="{ name: 'produtoedit', params: {id: produto.id}}">Editar</router-link> |
+                <a href="javascript:void(0)" v-on:click="excluirprod(produto.id)">Excluir</a>
               </td>
             </tr>
           </tbody>
@@ -48,13 +49,21 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions('products',['getProducts']),
+    ...mapActions('products',['getProducts', 'deleteProducts']),
+
     dinheiro(valor) {
       return "R$ " + valor.toFixed(2);
     },
+
+    excluirprod(excluir){
+      alert(excluir)
+      this.deleteProducts(excluir)
+      this.getProducts();
+      this.$router.go()
+    }
   },
   computed: {
-    ...mapState(["products"]),
+    ...mapState(["products"]), 
   },
   created() {
     this.getProducts();

@@ -91,10 +91,11 @@ export default {
         category: this.form.category,
       };
       this.addProducts(add);
-      this.form.name = "";
-      this.form.amount = "";
-      this.form.price = "";
-      this.form.category = "";
+      this.$router.push("/produtos")
+      // this.form.name = "";
+      // this.form.amount = "";
+      // this.form.price = "";
+      // this.form.category = "";
     },
   },
   created() {
