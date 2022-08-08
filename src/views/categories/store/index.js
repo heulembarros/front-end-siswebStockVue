@@ -13,7 +13,9 @@ export default {
 
     actions: {
         getCategories( { commit } ){
-            axios.get(BASE_URL+'/categories').then(resp => {
+            var token = localStorage.getItem('token')
+            const headers = { Authorization: `Bearer ${token}` }
+            axios.get(BASE_URL+'/categories', { headers }).then(resp => {
                 commit('getCategoriesM', resp.data)
             })
         }
