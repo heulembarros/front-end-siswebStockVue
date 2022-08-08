@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="row mt-4">
-      <div class="col-lg-12 header-page"><h4 class="title">Login</h4></div>
+      <div class="col-lg-12 header-page"><h4 class="title">Cadastre-se</h4></div>
     </div>
     <div class="row mt-5">
       <div class="col-lg-6">
@@ -25,6 +25,16 @@
                       </div>
                       <div class="col-lg-12 col-sm-12 col-md-12">
                         <div class="form-group">
+                          <label>Email</label>
+                          <input
+                            type="mail"
+                            class="form-control"
+                            v-model="email"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-12 col-sm-12 col-md-12">
+                        <div class="form-group">
                           <label>Senha</label>
                           <input
                             type="password"
@@ -34,16 +44,10 @@
                           />
                         </div>
                       </div>
-
-                      <div class="col-lg-12 col-sm-12 col-md-12">
-                        <p><router-link to="/cadastro">Ainda não é cadastrado? Cadastre-se.</router-link></p>
-                      </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-12 col-sm-12 col-md-12">
-                        <button class="btn btn-primary" v-on:click="login">
-                          Entrar
-                        </button>
+                        <button class="btn btn-primary" v-on:click="login">Cadastrar</button>
                       </div>
                     </div>
                   </div>
@@ -53,32 +57,36 @@
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import Axios from "axios";
+import Axios from 'axios';
 
 export default {
   data() {
     return {
       username: "",
+      email: "",
       password: "",
     };
   },
   methods: {
-    login() {
-      event.preventDefault;
-      const dados = {
-        username: this.username,
-        password: this.password,
-      };
-      Axios.post("http://localhost:8083/login", dados).then((response) => {
-        localStorage.setItem("userinfo", JSON.stringify(response.data));
-        this.$router.push("/");
-      });
-    },
+    login(){
+        event.preventDefault
+        const dados = {
+            username: this.username,
+            email: this.email,
+            password: this.password
+        }
+        Axios.post('http://localhost:8083/users', dados).then(response => {
+            // localStorage.setItem("userinfo", JSON.stringify(response.data));
+            console.log(response.data)
+            this.$router.push('/login')
+        });
+    }
   },
 };
 </script>

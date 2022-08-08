@@ -69,7 +69,8 @@ export default {
     ...mapActions("products", ["getProducts", "deleteProducts"]),
 
     dinheiro(valor) {
-      return "R$ " + valor.toFixed(2);
+      var valorFinal = valor.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
+      return valorFinal;
     },
 
     async excluirprod(id, name) {

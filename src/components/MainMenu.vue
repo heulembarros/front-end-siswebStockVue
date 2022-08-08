@@ -55,4 +55,7 @@ export default {
 li.nav-item {
   padding: 5px 7px;
 }
+.btn-outline-success a:hover, .btn-outline-success a:focus {
+    color: #fff;
+}
 </style>

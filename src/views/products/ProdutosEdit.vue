@@ -37,6 +37,7 @@
                   <input
                     type="text"
                     class="form-control"
+                    v-money="money"
                     v-model="produto.price"
                   />
                 </div>
@@ -58,7 +59,10 @@
                   <router-link to="/produtos">Cancelar</router-link>
                 </button>
 
-                <button class="btn btn-primary" v-on:click="editProduto(produto)">
+                <button
+                  class="btn btn-primary"
+                  v-on:click="editProduto(produto)"
+                >
                   Atualizar
                 </button>
               </div>
@@ -68,10 +72,12 @@
       </div>
     </div>
   </div>
+  {{this.price}}
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { VMoney } from "v-money";
 
 export default {
   data() {
@@ -81,21 +87,28 @@ export default {
         id: "",
         name: "",
         amount: "",
-        price: "",
         category: {
           id: "",
           name: "",
         },
       },
+      price: "",
+      money: {
+        decimal: ",",
+        thousands: ".",
+        prefix: "R$ ",
+        suffix: "",
+        precision: 2,
+        masked: false /* doesn't work with directive */,
+      },
     };
   },
-
+  directives: { money: VMoney },
   computed: {
     ...mapState(["products"]),
   },
   methods: {
-
-    ...mapActions("products", ['findProductById', 'updateProducts']),
+    ...mapActions("products", ["findProductById", "updateProducts"]),
 
     async editProduto(produto) {
       event.preventDefault();
@@ -109,12 +122,11 @@ export default {
           name: produto.category.name,
         },
       };
-      try{
+      try {
         await this.updateProducts(update);
         await this.findProductById(produto.id);
-      }
-      catch(erro){
-        console.log(erro.data)
+      } catch (erro) {
+        console.log(erro.data);
       }
     },
   },

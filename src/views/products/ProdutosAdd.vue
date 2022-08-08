@@ -26,7 +26,7 @@
             <div class="col-lg-12 col-sm-12 col-md-12">
               <div class="form-group">
                 <label>Valor</label>
-                <input type="text" class="form-control" v-model="form.price" />
+                <input type="text" class="form-control" v-money="money" v-model="price" />
               </div>
             </div>
 
@@ -60,42 +60,52 @@
       </div>
     </div>
   </div>
+  {{price}}
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import {VMoney} from 'v-money'
 
 export default {
   data() {
     return {
       form: {
         name: "",
-        amount: "",
-        price: "",
+        amount: "",        
         category: {
           id: "",
           name: "",
         },
       },
+        price: 0,
+        money: {
+          decimal: ',',
+          thousands: '.',
+          prefix: 'R$ ',
+          suffix: '',
+          precision: 2,
+          masked: false /* doesn't work with directive */
+        }      
     };
   },
+  directives: {money: VMoney},
   methods: {
     ...mapActions(["getCategories"]),
     ...mapActions("products", ["addProducts"]),
     addProdutos(add) {
       event.preventDefault();
+      this.price = this.price.replace(/\./g, '')
+      this.price = this.price.slice(3).replace(',', '.')
+      
       add = {
         name: this.form.name,
         amount: this.form.amount,
-        price: this.form.price,
+        price: this.price,
         category: this.form.category,
       };
       this.addProducts(add);
       this.$router.push("/produtos")
-      // this.form.name = "";
-      // this.form.amount = "";
-      // this.form.price = "";
-      // this.form.category = "";
     },
   },
   created() {
