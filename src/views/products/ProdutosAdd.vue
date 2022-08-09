@@ -60,7 +60,6 @@
       </div>
     </div>
   </div>
-  {{price}}
 </template>
 
 <script>
@@ -91,7 +90,7 @@ export default {
   },
   directives: {money: VMoney},
   methods: {
-    ...mapActions(["getCategories"]),
+    ...mapActions('categories',["getCategories"]),
     ...mapActions("products", ["addProducts"]),
     addProdutos(add) {
       event.preventDefault();

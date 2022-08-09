@@ -19,5 +19,6 @@ export default {
                 commit('getCategoriesM', resp.data)
             })
         }
-    }
+    },
+    namespaced:true,
 }

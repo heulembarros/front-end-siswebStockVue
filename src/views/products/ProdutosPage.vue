@@ -11,10 +11,11 @@
     <div class="row mt-5">
       <div class="col-lg-12 col-sm-12 col-md-12">
         <div id="demo"></div>
-        <table class="table">
+        <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">Id</th>
+              <th scope="col">Ord</th>
+              <th scope="col">ID</th>
               <th scope="col">Nome</th>
               <th scope="col">Quantidade</th>
               <th scope="col">Valor</th>
@@ -24,17 +25,19 @@
           </thead>
           <tbody>
             <tr v-for="(produto, key) in products.products" :key="key">
-              <th scope="row">{{ produto.id }}</th>
+              <th scope="row">{{ key }}</th>
+              <th>{{ produto.id }}</th>
               <td>{{ produto.name }}</td>
               <td>{{ produto.amount }}</td>
               <td>{{ dinheiro(produto.price) }}</td>
-              <td>
+              <td>{{ produto.category.name}}</td>
+              <!-- <td>
                 <span
                   v-for="(categoria, index) in produto.category"
                   :key="index"
                   >{{ categoria }}</span
                 >
-              </td>
+              </td> -->
               <td>
                 <router-link
                   :to="{ name: 'produtoedit', params: { id: produto.id } }"

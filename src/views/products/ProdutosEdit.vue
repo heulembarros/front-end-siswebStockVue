@@ -37,7 +37,6 @@
                   <input
                     type="text"
                     class="form-control"
-                    v-money="money"
                     v-model="produto.price"
                   />
                 </div>
@@ -50,6 +49,17 @@
                     class="form-control"
                     v-model="produto.category.name"
                   />
+
+                  <select class="form-control" v-model="form.category">
+                  <option
+                    :selected="form.category == produto.category.id"
+                    v-for="cat in categories.categories"
+                    :key="cat.id"
+                    :value="cat.id"
+                  >
+                    {{ cat.name }}
+                  </option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -72,7 +82,7 @@
       </div>
     </div>
   </div>
-  {{this.price}}
+  {{categories}}
 </template>
 
 <script>
@@ -92,7 +102,7 @@ export default {
           name: "",
         },
       },
-      price: "",
+      price: '',
       money: {
         decimal: ",",
         thousands: ".",
@@ -106,9 +116,11 @@ export default {
   directives: { money: VMoney },
   computed: {
     ...mapState(["products"]),
+    ...mapState(["categories"]),
   },
   methods: {
     ...mapActions("products", ["findProductById", "updateProducts"]),
+    ...mapActions("categories", ["getCategories"]),
 
     async editProduto(produto) {
       event.preventDefault();
@@ -124,7 +136,7 @@ export default {
       };
       try {
         await this.updateProducts(update);
-        await this.findProductById(produto.id);
+        // await this.findProductById(produto.id);
       } catch (erro) {
         console.log(erro.data);
       }
@@ -132,6 +144,7 @@ export default {
   },
   created() {
     this.findProductById(this.$route.params.id);
+    this.getCategories();
   },
 };
 </script>

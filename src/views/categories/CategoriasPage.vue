@@ -16,7 +16,30 @@
         </div>
       </div>
     </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Categoria</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="produto in products.products" :key="produto.id">
+              <td>{{produto.name}}</td>
+              <td>{{produto.category.name}}</td>
+              <td>{{produto.price}}</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -27,14 +50,16 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(["getCategories"]),
+    ...mapActions("categories", ["getCategories"]),
+    ...mapActions("products", ["getProducts"]),
   },
   created() {
     this.getCategories();
+    this.getProducts();
   },
 
   computed: {
-    ...mapState(["categories"]),
+    ...mapState(["categories", "products"]),
   },
 };
 </script>

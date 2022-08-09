@@ -23,15 +23,15 @@ export const addProducts = ({ commit }, add) => {
   })
 }
 
-export const getCategories = ({ commit }) => {
+// export const getCategories = ({ commit }) => {
 
-  var userinfo = JSON.parse(localStorage.getItem('userinfo'))
-  const headers = { Authorization: `Bearer ${userinfo.token}` }
+//   var userinfo = JSON.parse(localStorage.getItem('userinfo'))
+//   const headers = { Authorization: `Bearer ${userinfo.token}` }
 
-  Axios.get(BASE_URL + '/categories', {headers}).then((resp) => {
-    commit(types.GET_CATEGORIES, resp.data)
-  })
-}
+//   Axios.get(BASE_URL + '/categories', {headers}).then((resp) => {
+//     commit(types.GET_CATEGORIES, resp.data)
+//   })
+// }
 
 export const findProductById = ({ commit }, id) => {
 
