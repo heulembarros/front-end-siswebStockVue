@@ -37,8 +37,10 @@
                   <input
                     type="text"
                     class="form-control"
-                    v-model="produto.price"
+                    v-model.lazy="produto.price"
+                    v-money="money"
                   />
+                  {{produto.price}}
                 </div>
               </div>
               <div class="col-lg-12 col-sm-12 col-md-12">
@@ -51,14 +53,14 @@
                   />
 
                   <select class="form-control" v-model="form.category">
-                  <option
-                    :selected="form.category == produto.category.id"
-                    v-for="cat in categories.categories"
-                    :key="cat.id"
-                    :value="cat.id"
-                  >
-                    {{ cat.name }}
-                  </option>
+                    <option
+                      :selected="form.category == produto.category.id"
+                      v-for="cat in categories.categories"
+                      :key="cat.id"
+                      :value="cat.id"
+                    >
+                      {{ cat.name }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -82,7 +84,7 @@
       </div>
     </div>
   </div>
-  {{categories}}
+  {{ categories }}
 </template>
 
 <script>
@@ -102,7 +104,7 @@ export default {
           name: "",
         },
       },
-      price: '',
+      // price: "",
       money: {
         decimal: ",",
         thousands: ".",
@@ -144,6 +146,7 @@ export default {
   },
   created() {
     this.findProductById(this.$route.params.id);
+
     this.getCategories();
   },
 };

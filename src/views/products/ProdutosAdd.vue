@@ -26,7 +26,12 @@
             <div class="col-lg-12 col-sm-12 col-md-12">
               <div class="form-group">
                 <label>Valor</label>
-                <input type="text" class="form-control" v-money="money" v-model="price" />
+                <input
+                  type="text"
+                  class="form-control"
+                  v-model.lazy="price"
+                  v-money="money"
+                />
               </div>
             </div>
 
@@ -64,39 +69,39 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import {VMoney} from 'v-money'
+import { VMoney } from "v-money";
 
 export default {
   data() {
     return {
       form: {
         name: "",
-        amount: "",        
+        amount: "",
         category: {
           id: "",
           name: "",
         },
       },
-        price: 0,
-        money: {
-          decimal: ',',
-          thousands: '.',
-          prefix: 'R$ ',
-          suffix: '',
-          precision: 2,
-          masked: false /* doesn't work with directive */
-        }      
+      price: 0,
+      money: {
+        decimal: ",",
+        thousands: ".",
+        prefix: "R$ ",
+        suffix: "",
+        precision: 2,
+        masked: false /* doesn't work with directive */,
+      },
     };
   },
-  directives: {money: VMoney},
+  directives: { money: VMoney },
   methods: {
-    ...mapActions('categories',["getCategories"]),
+    ...mapActions("categories", ["getCategories"]),
     ...mapActions("products", ["addProducts"]),
     addProdutos(add) {
       event.preventDefault();
-      this.price = this.price.replace(/\./g, '')
-      this.price = this.price.slice(3).replace(',', '.')
-      
+      this.price = this.price.replace(/\./g, "");
+      this.price = this.price.slice(3).replace(",", ".");
+
       add = {
         name: this.form.name,
         amount: this.form.amount,
@@ -104,7 +109,7 @@ export default {
         category: this.form.category,
       };
       this.addProducts(add);
-      this.$router.push("/produtos")
+      this.$router.push("/produtos");
     },
   },
   created() {

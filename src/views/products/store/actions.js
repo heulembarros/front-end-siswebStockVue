@@ -39,7 +39,14 @@ export const findProductById = ({ commit }, id) => {
   const headers = { Authorization: `Bearer ${userinfo.token}` }
 
   Axios.get(BASE_URL + '/products/' + id + '/', {headers}).then((resp) => {
-    commit(types.FIND_PRODUCTS, resp.data)
+    const newdados = {
+      id:resp.data.id,
+      name:resp.data.name,
+      amount:resp.data.amount,
+      price:resp.data.price.toFixed(2)
+      }    
+    commit(types.FIND_PRODUCTS, newdados)
+    // commit(types.FIND_PRODUCTS, resp.data)
   })
 }
 
